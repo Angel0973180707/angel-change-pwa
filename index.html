@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <header class="topbar">
+  <header class="topbar" id="top">
     <div class="brand">
       <div class="mark" aria-hidden="true"></div>
       <div class="txt">
@@ -48,6 +48,7 @@
           <div class="heroActions">
             <button class="btn primary" id="btnStart" type="button">按一下就開始</button>
             <button class="btn" id="btnJumpQuotes" type="button">我想先看一句金句</button>
+            <button class="btn ghost" id="btnOpenFormTop" type="button">回饋</button>
           </div>
           <div class="micro">
             <span class="pill">可日常練習</span>
@@ -79,7 +80,7 @@
             <summary>新增／管理金句</summary>
 
             <div class="field">
-              <label for="quoteNew">新增一句（可貼上你喜歡的句子）</label>
+              <label for="quoteNew">新增一句</label>
               <div class="row">
                 <input id="quoteNew" type="text" inputmode="text" placeholder="例如：先停一下，就已經在改變了。" />
                 <button class="btn" id="btnAddQuote" type="button">新增</button>
@@ -96,6 +97,7 @@
       </section>
 
       <section class="flow" aria-label="三步流程">
+        <!-- STEP 1 -->
         <div class="step card" id="step1">
           <div class="cardHead stepHead">
             <div class="kicker">STEP 1</div>
@@ -142,6 +144,7 @@
               </select>
               <button class="btn ghost copy" data-copy-from="s1_phraseSelect" type="button">一鍵複製</button>
             </div>
+
             <div class="field">
               <label for="s1_phraseCustom">我自己的版本（可選）</label>
               <div class="row">
@@ -156,6 +159,7 @@
           </div>
         </div>
 
+        <!-- STEP 2 -->
         <div class="step card" id="step2">
           <div class="cardHead stepHead">
             <div class="kicker">STEP 2</div>
@@ -211,6 +215,7 @@
               </select>
               <button class="btn ghost copy" data-copy-from="s2_phraseSelect" type="button">一鍵複製</button>
             </div>
+
             <div class="field">
               <label for="s2_phraseCustom">我自己的版本（可選）</label>
               <div class="row">
@@ -226,6 +231,7 @@
           </div>
         </div>
 
+        <!-- STEP 3 -->
         <div class="step card" id="step3">
           <div class="cardHead stepHead">
             <div class="kicker">STEP 3</div>
@@ -266,6 +272,7 @@
               </select>
               <button class="btn ghost copy" data-copy-from="s3_phraseSelect" type="button">一鍵複製</button>
             </div>
+
             <div class="field">
               <label for="s3_phraseCustom">我自己的版本（可選）</label>
               <div class="row">
@@ -284,6 +291,7 @@
             <div class="row">
               <button class="btn primary" id="btnSave" type="button">保存今天（自動）</button>
               <button class="btn ghost" id="btnCopySummary" type="button">複製我的三步紀錄</button>
+              <button class="btn ghost" id="btnOpenFormBottom" type="button">回饋</button>
             </div>
           </div>
 
@@ -306,9 +314,10 @@
     <section id="panel-about" class="panel" role="tabpanel" aria-labelledby="tab-about">
       <article class="card">
         <h2 class="h2">說明｜改變：換一個反應</h2>
+
         <p class="body">
           這套工具要做的事很單純：<b>在自動化反應啟動時，幫你找到一個「斷點」</b>。<br />
-          很多時候，我們不是不想改，而是反應太快、太熟練，情緒一上來就像系統自動開機，
+          很多時候，我們不是不想改，而是反應太快、太熟練。情緒一上來像系統自動開機，
           先衝出去、先說出口、先做了，後來才懊惱。<br /><br />
           所以這裡不要求你「立刻冷靜」，也不叫你「想通就好」。
           我們只練三步：<b>暫停（讓身體回來） → 看見（看清楚系統在跑什麼） → 換路（選一個可行的新反應）</b>。<br />
@@ -318,7 +327,7 @@
 
         <hr class="hr" />
 
-        <h3 class="h3">如何開啟與安裝（很重要）</h3>
+        <h3 class="h3">如何開啟與安裝</h3>
         <ol class="ol">
           <li>把這個工具頁的<strong>網址複製</strong>起來。</li>
           <li>到手機的瀏覽器（Chrome / Safari）中，<strong>複製網址貼到瀏覽器</strong>開啟。</li>
@@ -331,36 +340,9 @@
         </ol>
         <p class="hint">提示：安裝後就能像 App 一樣獨立開啟（可離線使用）。</p>
 
-        <hr class="hr" />
-
-        <h3 class="h3">Icon 檔案與放置位置</h3>
-        <p class="body">
-          請把兩個 PNG icon 放在以下路徑：<code>assets/icons/</code><br />
-          檔名固定為：<code>icon-192.png</code>、<code>icon-512.png</code>
-        </p>
-
-        <hr class="hr" />
-
-        <h3 class="h3">回饋收集（Google 表單建議欄位）</h3>
-        <p class="body">
-          你可以建立一份 Google 表單，標題建議：「改變｜換一個反應｜使用回饋」。
-          以下是建議題目（可直接照抄）：
-        </p>
-        <ul class="ul">
-          <li><b>使用情境</b>（單選）：親子/伴侶/工作/自己內在/其他</li>
-          <li><b>我卡在哪一步？</b>（單選）：1 暫停 / 2 看見 / 3 換路 / 其實都卡</li>
-          <li><b>最有感的一句話</b>（短答）</li>
-          <li><b>我想新增什麼功能或內容</b>（長答）</li>
-          <li><b>Email（可選）</b>（短答，非必填）</li>
-          <li><b>我願意接受後續更新通知</b>（核取方塊，可選）</li>
-        </ul>
-        <p class="hint">
-          你建立表單後，把表單連結貼到 <code>app.js</code> 裡的 <code>FORM_URL</code> 就能在工具頁顯示「回饋」按鈕。
-        </p>
-
         <div class="row">
-          <button class="btn" id="btnOpenForm" type="button">前往回饋表單</button>
-          <button class="btn ghost" id="btnCopyLink" type="button">複製本頁網址提示文</button>
+          <button class="btn" id="btnOpenForm" type="button">回饋（Google 表單）</button>
+          <button class="btn ghost" id="btnCopyLink" type="button">複製安裝提示文</button>
         </div>
       </article>
     </section>
