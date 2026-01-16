@@ -1,9 +1,7 @@
-/* sw.js — 改變｜換一個反應
-   重要：改版時請更新 CACHE_VERSION，確保新版本會被取用
-*/
 'use strict';
 
-const CACHE_VERSION = 'angel-change-v1.0.1-2026-01-16';
+/* 改版時請更新這個版本號，讓快取一定更新 */
+const CACHE_VERSION = 'angel-change-v1.0.2-2026-01-16';
 const CACHE_NAME = `cache-${CACHE_VERSION}`;
 
 const ASSETS = [
