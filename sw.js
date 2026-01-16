@@ -3,7 +3,7 @@
 */
 'use strict';
 
-const CACHE_VERSION = 'angel-change-v1.0.0-2026-01-16';
+const CACHE_VERSION = 'angel-change-v1.0.1-2026-01-16';
 const CACHE_NAME = `cache-${CACHE_VERSION}`;
 
 const ASSETS = [
@@ -44,13 +44,11 @@ self.addEventListener('fetch', (event) => {
 
     try{
       const fresh = await fetch(req);
-      // only cache same-origin
       if(new URL(req.url).origin === self.location.origin){
         cache.put(req, fresh.clone());
       }
       return fresh;
     }catch(e){
-      // fallback to index for navigation when offline
       if(req.mode === 'navigate'){
         const fallback = await cache.match('./index.html');
         if(fallback) return fallback;
