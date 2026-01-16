@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1411" />
+  <title>改變｜換一個反應</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div class="txt">
+        <div class="title">改變｜換一個反應</div>
+        <div class="sub">三步流程：暫停 → 看見 → 換路</div>
+      </div>
+    </div>
+
+    <div class="topActions">
+      <button class="btn ghost" id="btnInstall" type="button" hidden>安裝到桌面</button>
+      <button class="btn ghost" id="btnExport" type="button">匯出紀錄</button>
+      <button class="btn ghost" id="btnReset" type="button">清空</button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="頁籤">
+    <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-tool" id="tab-tool" type="button">開始練習</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-about" id="tab-about" type="button">說明與安裝</button>
+  </nav>
+
+  <main class="wrap">
+    <!-- TOOL PANEL -->
+    <section id="panel-tool" class="panel is-active" role="tabpanel" aria-labelledby="tab-tool">
+      <section class="hero">
+        <div class="heroCard">
+          <h1 class="h1">當情緒啟動時，先別急著變好。</h1>
+          <p class="lead">
+            你只要先做三件事：<b>停一下、看清楚、換一條路</b>。
+            這不是在壓住你，而是在把方向盤，交回你手上。
+          </p>
+          <div class="heroActions">
+            <button class="btn primary" id="btnStart" type="button">按一下就開始</button>
+            <button class="btn" id="btnJumpQuotes" type="button">我想先看一句金句</button>
+          </div>
+          <div class="micro">
+            <span class="pill">可日常練習</span>
+            <span class="pill">可現場急救</span>
+            <span class="pill">不用說教</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="quotes" id="quotesBlock">
+        <div class="card">
+          <div class="cardHead">
+            <h2 class="h2">金句輪換</h2>
+            <label class="switch">
+              <input id="quotesEnabled" type="checkbox" />
+              <span class="slider" aria-hidden="true"></span>
+              <span class="switchTxt">啟用</span>
+            </label>
+          </div>
+
+          <p class="quote" id="quoteText">—</p>
+
+          <div class="row">
+            <button class="btn" id="btnNextQuote" type="button">換一句</button>
+            <button class="btn ghost" id="btnCopyQuote" type="button">複製</button>
+          </div>
+
+          <details class="details">
+            <summary>新增／管理金句</summary>
+
+            <div class="field">
+              <label for="quoteNew">新增一句（可貼上你喜歡的句子）</label>
+              <div class="row">
+                <input id="quoteNew" type="text" inputmode="text" placeholder="例如：先停一下，就已經在改變了。" />
+                <button class="btn" id="btnAddQuote" type="button">新增</button>
+              </div>
+              <p class="hint">金句會保存在你的裝置（localStorage）。</p>
+            </div>
+
+            <div class="field">
+              <label>目前金句清單</label>
+              <div class="quoteList" id="quoteList"></div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="flow" aria-label="三步流程">
+        <div class="step card" id="step1">
+          <div class="cardHead stepHead">
+            <div class="kicker">STEP 1</div>
+            <h2 class="h2 stepTitle">斷點停火｜暫停</h2>
+            <div class="tags">
+              <span class="tag">#暫停</span><span class="tag">#斷點</span><span class="tag">#情緒急救</span><span class="tag">#自動化反應</span>
+            </div>
+          </div>
+
+          <p class="body">
+            在自動化反應全速運轉前，先切回系統管理員模式。<br />
+            你不需要立刻變好，你只需要先停一下。
+          </p>
+
+          <div class="grid2">
+            <div class="field">
+              <label for="s1_feel">✦ 此刻我感受到的是：</label>
+              <textarea id="s1_feel" rows="3" placeholder="例如：委屈、焦躁、被誤解、很想反擊…"></textarea>
+            </div>
+
+            <div class="field">
+              <label>✦ 我願意暫停 30～90 秒：</label>
+              <div class="timerBox">
+                <div class="timerLine">
+                  <input id="s1_seconds" type="range" min="30" max="90" step="5" value="45" />
+                  <div class="timerReadout"><span id="s1_secondsLabel">45</span> 秒</div>
+                </div>
+                <div class="row">
+                  <button class="btn primary" id="btnTimer" type="button">開始暫停</button>
+                  <button class="btn ghost" id="btnTimerReset" type="button">重設</button>
+                </div>
+                <p class="hint" id="timerHint">現在，先什麼都不做。讓身體先回來。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="say">
+            <div class="sayHead">可說出口的替代句（選一句，按一下複製）</div>
+            <div class="row">
+              <select id="s1_phraseSelect" class="select">
+                <option value="我先停一下，等我回來再說。">我先停一下，等我回來再說。</option>
+                <option value="我現在情緒有點滿，我先緩 30 秒。">我現在情緒有點滿，我先緩 30 秒。</option>
+                <option value="我不想用衝的回應，我先呼吸一下。">我不想用衝的回應，我先呼吸一下。</option>
+              </select>
+              <button class="btn ghost copy" data-copy-from="s1_phraseSelect" type="button">一鍵複製</button>
+            </div>
+            <div class="field">
+              <label for="s1_phraseCustom">我自己的版本（可選）</label>
+              <div class="row">
+                <input id="s1_phraseCustom" type="text" placeholder="寫一句你覺得說得出口的話" />
+                <button class="btn ghost copy" data-copy-from="s1_phraseCustom" type="button">複製</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="navRow">
+            <button class="btn" data-scroll="#step2" type="button">下一步：看見</button>
+          </div>
+        </div>
+
+        <div class="step card" id="step2">
+          <div class="cardHead stepHead">
+            <div class="kicker">STEP 2</div>
+            <h2 class="h2 stepTitle">狀態掃描｜看見</h2>
+            <div class="tags">
+              <span class="tag">#看見</span><span class="tag">#掃描</span><span class="tag">#不評價</span><span class="tag">#系統狀態</span>
+            </div>
+          </div>
+
+          <p class="body">
+            現在不是要想對策，也不是要檢討誰。<br />
+            只是回頭看一眼：剛剛，發生了什麼？
+          </p>
+
+          <div class="field">
+            <label for="s2_thought">✦ 我腦中出現的第一個念頭是：</label>
+            <textarea id="s2_thought" rows="3" placeholder="例如：他根本不尊重我／我一定又做不好了／我必須馬上解釋…"></textarea>
+          </div>
+
+          <div class="grid2">
+            <div class="field">
+              <label for="s2_body">✦ 身體最明顯的感受是：</label>
+              <input id="s2_body" type="text" placeholder="緊、熱、重、卡、想逃…（可多個，用逗號分開）" />
+              <div class="chips" id="bodyChips" aria-label="快速選擇身體感受">
+                <button class="chip" data-chip="緊" type="button">緊</button>
+                <button class="chip" data-chip="熱" type="button">熱</button>
+                <button class="chip" data-chip="重" type="button">重</button>
+                <button class="chip" data-chip="卡" type="button">卡</button>
+                <button class="chip" data-chip="想逃" type="button">想逃</button>
+                <button class="chip" data-chip="想吼" type="button">想吼</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>✦ 情緒現在大概在幾分？</label>
+              <div class="meter">
+                <div class="meterLine">
+                  <input id="s2_score" type="range" min="0" max="10" step="1" value="5" />
+                  <div class="meterReadout"><span id="s2_scoreLabel">5</span> / 10</div>
+                </div>
+                <p class="hint">你不是這些反應，你只是看見它們正在運作。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="say">
+            <div class="sayHead">可說出口的替代句（選一句，按一下複製）</div>
+            <div class="row">
+              <select id="s2_phraseSelect" class="select">
+                <option value="我想先把狀態看清楚，再回你。">我想先把狀態看清楚，再回你。</option>
+                <option value="我先確認一下自己在想什麼，等一下再講。">我先確認一下自己在想什麼，等一下再講。</option>
+                <option value="我現在不做判斷，我先把情緒放慢。">我現在不做判斷，我先把情緒放慢。</option>
+              </select>
+              <button class="btn ghost copy" data-copy-from="s2_phraseSelect" type="button">一鍵複製</button>
+            </div>
+            <div class="field">
+              <label for="s2_phraseCustom">我自己的版本（可選）</label>
+              <div class="row">
+                <input id="s2_phraseCustom" type="text" placeholder="寫一句讓你能保持穩定的話" />
+                <button class="btn ghost copy" data-copy-from="s2_phraseCustom" type="button">複製</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="navRow">
+            <button class="btn ghost" data-scroll="#step1" type="button">回到：暫停</button>
+            <button class="btn" data-scroll="#step3" type="button">下一步：換路</button>
+          </div>
+        </div>
+
+        <div class="step card" id="step3">
+          <div class="cardHead stepHead">
+            <div class="kicker">STEP 3</div>
+            <h2 class="h2 stepTitle">路徑重寫｜換一個做法</h2>
+            <div class="tags">
+              <span class="tag">#換路</span><span class="tag">#新反應</span><span class="tag">#可行就好</span><span class="tag">#更新版本</span>
+            </div>
+          </div>
+
+          <p class="body">
+            你不需要找到完美解法，只要不要再走同一條老路。<br />
+            選一個「不一樣但可行」的新路徑。
+          </p>
+
+          <div class="grid2">
+            <div class="field">
+              <label for="s3_old">我原本會怎麼反應（舊路）</label>
+              <textarea id="s3_old" rows="3" placeholder="例如：立刻反擊／狂解釋／冷戰不說話／用力忍住…"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="s3_new">我願意改變的「一句話／一個動作」（新路）</label>
+              <textarea id="s3_new" rows="3" placeholder="例如：先說我的感受，再說我的需要／先問一個問題／先離開 2 分鐘…"></textarea>
+              <label class="check">
+                <input id="s3_ten" type="checkbox" />
+                <span>做不到 100% 沒關係，我先做到 10% 也算。</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="say">
+            <div class="sayHead">可說出口的替代句（選一句，按一下複製）</div>
+            <div class="row">
+              <select id="s3_phraseSelect" class="select">
+                <option value="我想換個方式說：我在意的是＿＿＿。">我想換個方式說：我在意的是＿＿＿。</option>
+                <option value="我們先把事情說清楚，我不想用情緒處理。">我們先把事情說清楚，我不想用情緒處理。</option>
+                <option value="我先做一個小改變：先問你『你希望我怎麼做？』">我先做一個小改變：先問你『你希望我怎麼做？』</option>
+              </select>
+              <button class="btn ghost copy" data-copy-from="s3_phraseSelect" type="button">一鍵複製</button>
+            </div>
+            <div class="field">
+              <label for="s3_phraseCustom">我自己的版本（可選）</label>
+              <div class="row">
+                <input id="s3_phraseCustom" type="text" placeholder="寫一句你願意採用的新反應" />
+                <button class="btn ghost copy" data-copy-from="s3_phraseCustom" type="button">複製</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="finish cardLite">
+            <div class="finishTxt">
+              <b>收尾一句：</b>
+              你不是在修正自己，你是在替系統更新版本。<br />
+              今天只要有 <b>1 次</b>「先停一下」，你就已經在改變了。
+            </div>
+            <div class="row">
+              <button class="btn primary" id="btnSave" type="button">保存今天（自動）</button>
+              <button class="btn ghost" id="btnCopySummary" type="button">複製我的三步紀錄</button>
+            </div>
+          </div>
+
+          <div class="navRow">
+            <button class="btn ghost" data-scroll="#step2" type="button">回到：看見</button>
+            <button class="btn" data-scroll="#top" type="button">回到頂部</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <div class="footNote">
+          <span class="dot"></span>
+          這是一個陪伴工具，不是評分工具。你願意回來練習，就很好。
+        </div>
+      </footer>
+    </section>
+
+    <!-- ABOUT PANEL -->
+    <section id="panel-about" class="panel" role="tabpanel" aria-labelledby="tab-about">
+      <article class="card">
+        <h2 class="h2">說明｜改變：換一個反應</h2>
+        <p class="body">
+          這套工具要做的事很單純：<b>在自動化反應啟動時，幫你找到一個「斷點」</b>。<br />
+          很多時候，我們不是不想改，而是反應太快、太熟練，情緒一上來就像系統自動開機，
+          先衝出去、先說出口、先做了，後來才懊惱。<br /><br />
+          所以這裡不要求你「立刻冷靜」，也不叫你「想通就好」。
+          我們只練三步：<b>暫停（讓身體回來） → 看見（看清楚系統在跑什麼） → 換路（選一個可行的新反應）</b>。<br />
+          你每天練一次也可以；現場急救、需要先穩住的時候也可以。
+          <b>只要你願意停一下，你就已經在更新自己。</b>
+        </p>
+
+        <hr class="hr" />
+
+        <h3 class="h3">如何開啟與安裝（很重要）</h3>
+        <ol class="ol">
+          <li>把這個工具頁的<strong>網址複製</strong>起來。</li>
+          <li>到手機的瀏覽器（Chrome / Safari）中，<strong>複製網址貼到瀏覽器</strong>開啟。</li>
+          <li>安裝到桌面：
+            <ul class="ul">
+              <li><b>iPhone (Safari)</b>：點「分享」→「加入主畫面」。</li>
+              <li><b>Android (Chrome)</b>：右上角「⋮」→「安裝應用程式 / 加到主畫面」。</li>
+            </ul>
+          </li>
+        </ol>
+        <p class="hint">提示：安裝後就能像 App 一樣獨立開啟（可離線使用）。</p>
+
+        <hr class="hr" />
+
+        <h3 class="h3">Icon 檔案與放置位置</h3>
+        <p class="body">
+          請把兩個 PNG icon 放在以下路徑：<code>assets/icons/</code><br />
+          檔名固定為：<code>icon-192.png</code>、<code>icon-512.png</code>
+        </p>
+
+        <hr class="hr" />
+
+        <h3 class="h3">回饋收集（Google 表單建議欄位）</h3>
+        <p class="body">
+          你可以建立一份 Google 表單，標題建議：「改變｜換一個反應｜使用回饋」。
+          以下是建議題目（可直接照抄）：
+        </p>
+        <ul class="ul">
+          <li><b>使用情境</b>（單選）：親子/伴侶/工作/自己內在/其他</li>
+          <li><b>我卡在哪一步？</b>（單選）：1 暫停 / 2 看見 / 3 換路 / 其實都卡</li>
+          <li><b>最有感的一句話</b>（短答）</li>
+          <li><b>我想新增什麼功能或內容</b>（長答）</li>
+          <li><b>Email（可選）</b>（短答，非必填）</li>
+          <li><b>我願意接受後續更新通知</b>（核取方塊，可選）</li>
+        </ul>
+        <p class="hint">
+          你建立表單後，把表單連結貼到 <code>app.js</code> 裡的 <code>FORM_URL</code> 就能在工具頁顯示「回饋」按鈕。
+        </p>
+
+        <div class="row">
+          <button class="btn" id="btnOpenForm" type="button">前往回饋表單</button>
+          <button class="btn ghost" id="btnCopyLink" type="button">複製本頁網址提示文</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
