@@ -1,21 +1,11 @@
-/* 改變｜換一個反應 — app.js
-   - tabs
-   - install prompt (PWA)
-   - three-step inputs (localStorage autosave)
-   - 30~90s pause timer
-   - copy helpers
-   - quote rotator (toggle, add/remove, persist)
-   - export / reset
-*/
-
 'use strict';
 
-const VERSION = 'v1.0.0';
+const VERSION = 'v1.0.2';
 const LS_KEY = 'angel_change_react_v1';
 const LS_QUOTES = 'angel_change_quotes_v1';
 
-// ✅ 你建立 Google 表單後，把連結貼在這裡（留空就不顯示前往按鈕）
-const FORM_URL = '';
+/* ✅ 你的 Google 表單連結已設定 */
+const FORM_URL = 'https://forms.gle/wyWJ9KpaKx6HGXvP7';
 
 const $ = (sel, root=document) => root.querySelector(sel);
 const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
@@ -92,7 +82,6 @@ function loadState(){
   const data = safeJsonParse(raw, null);
   if(!data) return structuredClone(defaultState);
 
-  // merge with defaults (forward compatible)
   return {
     ...structuredClone(defaultState),
     ...data,
@@ -164,7 +153,6 @@ async function copyText(text){
     await navigator.clipboard.writeText(text);
     toast('已複製');
   }catch(e){
-    // fallback
     const ta = document.createElement('textarea');
     ta.value = text;
     ta.style.position = 'fixed';
@@ -190,11 +178,8 @@ function bindCopyButtons(){
       if(!el) return;
 
       let text = '';
-      if(el.tagName === 'SELECT'){
-        text = el.value;
-      }else{
-        text = (el.value || '').trim();
-      }
+      if(el.tagName === 'SELECT') text = el.value;
+      else text = (el.value || '').trim();
 
       if(!text){
         toast('目前沒有內容可複製');
@@ -267,9 +252,7 @@ function stopTimer(reset=false){
   timer.running = false;
   clearInterval(timer.id);
   timer.id = null;
-  if(reset){
-    timer.left = 0;
-  }
+  if(reset) timer.left = 0;
   renderTimer();
 }
 
@@ -325,7 +308,7 @@ function bindChips(){
     const val = btn.getAttribute('data-chip');
     const input = $('#s2_body');
     const cur = (input.value || '').trim();
-    const parts = cur ? cur.split(/[,，]/).map(s=>s.trim()).filter(Boolean) : [];
+    const parts = cur ? cur.split(/[,，、]/).map(s=>s.trim()).filter(Boolean) : [];
     if(!parts.includes(val)) parts.push(val);
     input.value = parts.join('、');
     input.dispatchEvent(new Event('input'));
@@ -482,15 +465,23 @@ function doReset(){
   toast('已清空');
 }
 
-/* ---------------- About: open form ---------------- */
+/* ---------------- Form ---------------- */
+function openForm(){
+  window.open(FORM_URL, '_blank', 'noopener');
+}
+
 function bindForm(){
-  const btn = $('#btnOpenForm');
-  if(FORM_URL){
-    btn.disabled = false;
-    btn.addEventListener('click', ()=> window.open(FORM_URL, '_blank', 'noopener'));
-  }else{
-    btn.disabled = true;
-    btn.textContent = '尚未設定表單連結';
+  const btns = ['#btnOpenForm', '#btnOpenFormTop', '#btnOpenFormBottom']
+    .map(id => $(id))
+    .filter(Boolean);
+
+  btns.forEach(btn=>{
+    btn.disabled = !FORM_URL;
+    btn.addEventListener('click', openForm);
+  });
+
+  if(!FORM_URL){
+    btns.forEach(btn => btn.textContent = '回饋（未設定）');
   }
 }
 
@@ -516,7 +507,6 @@ function init(){
   $('#tab-about').addEventListener('click', ()=> setTab('about'));
 
   $('#btnInstall').addEventListener('click', doInstall);
-
   $('#btnExport').addEventListener('click', exportToFile);
   $('#btnReset').addEventListener('click', doReset);
   $('#btnSave').addEventListener('click', ()=>{ saveState(); toast('已保存'); });
