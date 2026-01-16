@@ -1,5 +1,3 @@
-/* 改變｜換一個反應 — Angel Style (minimal, calming) */
-
 :root{
   --bg: #0b1411;
   --card: rgba(255,255,255,.06);
@@ -13,8 +11,6 @@
   --r: 18px;
   --r2: 14px;
   --max: 980px;
-
-  /* 斷字策略：中文自然斷行；英文/網址必要時可換行 */
   --linebreak: loose;
 }
 
@@ -95,7 +91,7 @@ code{
   font-weight: 800;
   letter-spacing: .2px;
   font-size: 15px;
-  white-space: nowrap;   /* 標題不切字 */
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -127,9 +123,9 @@ code{
   padding: 10px 14px;
   border-radius: 999px;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: .2px;
-  white-space: nowrap; /* 按鈕不切字 */
+  white-space: nowrap;
 }
 .tab.is-active{
   border-color: rgba(240,160,75,.55);
@@ -152,13 +148,13 @@ code{
 .h2{ font-size: 18px; margin: 0; line-height: 1.25; text-wrap: balance; }
 .h3{ font-size: 15px; margin: 0 0 10px; }
 
-/* ✅ 3) 中間提示字變小：lead/body/hint/tag */
-.lead{ margin: 8px 0 12px; color: var(--soft); font-size: 15px; }
-.body{ margin: 10px 0; color: var(--soft); font-size: 15px; }
+/* ✅ 再縮一階：中間文字更不擠 */
+.lead{ margin: 8px 0 12px; color: var(--soft); font-size: 14px; }
+.body{ margin: 10px 0; color: var(--soft); font-size: 14px; }
 
 .micro{ display:flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
 .pill{
-  font-size: 12px;
+  font-size: 11px;
   padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,.12);
@@ -188,7 +184,7 @@ code{
   gap: 10px;
 }
 
-/* ✅ Step 區頭：改成直排堆疊，讓標題有完整寬度、不再被擠斷字 */
+/* Step 區頭：直排堆疊，避免被擠斷字 */
 .stepHead{
   display: flex;
   flex-direction: column;
@@ -196,17 +192,16 @@ code{
   gap: 8px;
 }
 
-/* ✅ 1) STEP 1 不斷字、同一排 */
+/* STEP 1/2/3 不斷字 */
 .kicker{
   font-size: 12px;
   font-weight: 900;
-  letter-spacing: .08em; /* 降低字距，避免 ST / EP 被擠裂 */
+  letter-spacing: .06em;
   color: rgba(240,160,75,.95);
-  margin-bottom: 0;
   white-space: nowrap;
 }
 
-/* ✅ 2) 標題同一排（太長就省略，不換行） */
+/* 標題同一排（太長省略） */
 .stepTitle{
   white-space: nowrap;
   overflow: hidden;
@@ -217,7 +212,7 @@ code{
 
 .tags{ display:flex; gap: 6px; flex-wrap: wrap; }
 .tag{
-  font-size: 11px;          /* ✅ 3) 標籤字小一點 */
+  font-size: 10px; /* ✅ 更小 */
   padding: 3px 8px;
   border-radius: 999px;
   background: rgba(255,255,255,.04);
@@ -269,6 +264,7 @@ label{
   margin-bottom: 6px;
   color: rgba(255,255,255,.86);
   font-weight: 800;
+  font-size: 13px;
 }
 input[type="text"], textarea, .select{
   width: 100%;
@@ -278,15 +274,15 @@ input[type="text"], textarea, .select{
   background: rgba(0,0,0,.18);
   color: var(--text);
   outline: none;
+  font-size: 14px;
 }
 textarea{ resize: vertical; min-height: 72px; }
 input::placeholder, textarea::placeholder{ color: rgba(255,255,255,.55); }
 
-/* ✅ 3) hint 字小一點 */
 .hint{
   margin: 8px 0 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 10.5px; /* ✅ 更小 */
   line-height: 1.5;
 }
 
@@ -306,6 +302,7 @@ input::placeholder, textarea::placeholder{ color: rgba(255,255,255,.55); }
   text-align: right;
   font-weight: 900;
   color: rgba(255,255,255,.92);
+  font-size: 13px;
 }
 input[type="range"]{ width: 100%; }
 
@@ -318,7 +315,7 @@ input[type="range"]{ width: 100%; }
   border-radius: 999px;
   cursor: pointer;
   font-weight: 800;
-  font-size: 12px;
+  font-size: 11px;
 }
 .chip:hover{ background: rgba(255,255,255,.08); }
 
@@ -333,7 +330,7 @@ input[type="range"]{ width: 100%; }
   font-weight: 900;
   color: rgba(255,255,255,.90);
   margin-bottom: 8px;
-  font-size: 13px;
+  font-size: 12px; /* ✅ 更小 */
 }
 
 .check{
@@ -343,7 +340,7 @@ input[type="range"]{ width: 100%; }
   margin-top: 10px;
   color: var(--muted);
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
 }
 .check input{ margin-top: 3px; }
 
@@ -357,7 +354,7 @@ input[type="range"]{ width: 100%; }
 
 .quotes .quote{
   margin: 12px 0;
-  font-size: 16px;
+  font-size: 15px; /* ✅ 更小 */
   font-weight: 800;
   color: rgba(255,242,223,.96);
   line-height: 1.5;
@@ -369,6 +366,7 @@ input[type="range"]{ width: 100%; }
   cursor: pointer;
   font-weight: 900;
   color: rgba(255,255,255,.88);
+  font-size: 13px;
 }
 .quoteList{
   display:flex;
@@ -385,7 +383,7 @@ input[type="range"]{ width: 100%; }
   border: 1px solid rgba(255,255,255,.10);
   background: rgba(0,0,0,.14);
 }
-.quoteItemTxt{ flex: 1; color: rgba(255,242,223,.95); font-size: 13px; }
+.quoteItemTxt{ flex: 1; color: rgba(255,242,223,.95); font-size: 12.5px; }
 .quoteItemActions{ display:flex; gap: 8px; flex-wrap: wrap; }
 
 .switch{
@@ -430,6 +428,7 @@ input[type="range"]{ width: 100%; }
   background: rgba(255,255,255,.03);
   border-radius: 14px;
   padding: 12px;
+  font-size: 13px;
 }
 .dot{
   width: 10px; height: 10px;
@@ -438,7 +437,7 @@ input[type="range"]{ width: 100%; }
   box-shadow: 0 0 0 6px rgba(240,160,75,.15);
 }
 
-.ol, .ul{ color: rgba(255,242,223,.92); }
+.ol, .ul{ color: rgba(255,242,223,.92); font-size: 14px; }
 .ul{ margin-top: 6px; }
 .ol li, .ul li{ margin: 6px 0; }
 
@@ -458,6 +457,7 @@ input[type="range"]{ width: 100%; }
   transition: opacity .18s ease, transform .18s ease;
   max-width: min(92vw, 720px);
   text-align:center;
+  font-size: 13px;
 }
 .toast.show{
   opacity: 1;
