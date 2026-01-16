@@ -284,11 +284,9 @@ function startTimer(){
     if(timer.left <= 0){
       stopTimer(true);
       toast('完成：你已經為系統下了「暫停指令」。');
-      // gentle move to step2
       setTimeout(()=> $('#step2')?.scrollIntoView({ behavior:'smooth', block:'start' }), 500);
       return;
     }
-    // update label
     $('#s1_secondsLabel').textContent = String(timer.left);
   }, 1000);
 }
@@ -361,7 +359,6 @@ function saveQuotes(){
 function pickQuote(next=false){
   if(!quotes.list.length) return '—';
   if(next){
-    // rotate
     const idx = Math.max(0, quotes.list.indexOf(quotes.last));
     const n = (idx + 1) % quotes.list.length;
     quotes.last = quotes.list[n];
@@ -509,39 +506,31 @@ function escapeHtml(str){
 
 /* ---------------- Init ---------------- */
 function init(){
-  // register SW
   if('serviceWorker' in navigator){
     window.addEventListener('load', ()=>{
       navigator.serviceWorker.register('./sw.js').catch(()=>{});
     });
   }
 
-  // tabs
   $('#tab-tool').addEventListener('click', ()=> setTab('tool'));
   $('#tab-about').addEventListener('click', ()=> setTab('about'));
 
-  // install
   $('#btnInstall').addEventListener('click', doInstall);
 
-  // toolbar
   $('#btnExport').addEventListener('click', exportToFile);
   $('#btnReset').addEventListener('click', doReset);
   $('#btnSave').addEventListener('click', ()=>{ saveState(); toast('已保存'); });
 
-  // score label
   $('#s2_score').addEventListener('input', ()=>{
     $('#s2_scoreLabel').textContent = $('#s2_score').value;
   });
 
-  // quotes
   renderQuotes();
   bindQuotes();
 
-  // data & UI
   hydrateUI();
   bindAutosave();
 
-  // helper binds
   bindCopyButtons();
   bindScroll();
   bindTimer();
