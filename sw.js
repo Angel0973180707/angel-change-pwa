@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_VERSION = 'angel-change-v1.0.4-2026-01-17';
+const CACHE_VERSION = 'angel-change-v1.0.4-2026-01-17b';
 const CACHE_NAME = `cache-${CACHE_VERSION}`;
 
 const ASSETS = [
