@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION = 'v1.0.3';
+const VERSION = 'v1.0.4';
 const LS_KEY = 'angel_change_react_v1';
 const LS_QUOTES = 'angel_change_quotes_v1';
 
@@ -510,10 +510,15 @@ function escapeHtml(str){
 /* ---------------- Init ---------------- */
 function init(){
   if('serviceWorker' in navigator){
-    window.addEventListener('load', ()=>{
-      navigator.serviceWorker.register('./sw.js').catch(()=>{});
-    });
-  }
+    window.addEventListener('load', () => {
+  navigator.serviceWorker
+    .register(`./sw.js?v=${VERSION}`)
+    .catch(() => {});
+});
+    }
+}
+
+init();
 
   $('#tab-tool').addEventListener('click', ()=> setTab('tool'));
   $('#tab-about').addEventListener('click', ()=> setTab('about'));
