@@ -549,3 +549,9 @@ init();
 }
 
 init();
+const btnVideo = document.getElementById('btnVideo');
+if (btnVideo) {
+  btnVideo.addEventListener('click', () => {
+    window.open('https://youtu.be/pEm1sZS9g4g', '_blank');
+  });
+}
