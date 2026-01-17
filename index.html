@@ -30,9 +30,14 @@
     </div>
   </header>
 
-  <nav class="tabs" role="tablist" aria-label="頁籤">
-    <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-tool" id="tab-tool" type="button">開始練習</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-about" id="tab-about" type="button">說明與安裝</button>
+  <!-- ✅ Tabs + 相關影片 -->
+  <nav class="tabs" aria-label="頁籤與連結">
+    <div class="tabGroup" role="tablist" aria-label="頁籤">
+      <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-tool" id="tab-tool" type="button">開始練習</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-about" id="tab-about" type="button">說明與安裝</button>
+    </div>
+
+    <button class="tab tabLink" id="btnVideo" type="button" aria-label="開啟相關影片">相關影片</button>
   </nav>
 
   <main class="wrap">
