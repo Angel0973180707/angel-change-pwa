@@ -1,7 +1,6 @@
 'use strict';
 
-/* 改版時請更新這個版本號，讓快取一定更新 */
-const CACHE_VERSION = 'angel-change-v1.0.2-2026-01-16';
+const CACHE_VERSION = 'angel-change-v1.0.3-2026-01-17';
 const CACHE_NAME = `cache-${CACHE_VERSION}`;
 
 const ASSETS = [
