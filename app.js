@@ -1,11 +1,13 @@
 'use strict';
 
-const VERSION = 'v1.0.2';
+const VERSION = 'v1.0.3';
 const LS_KEY = 'angel_change_react_v1';
 const LS_QUOTES = 'angel_change_quotes_v1';
 
-/* ✅ 你的 Google 表單連結已設定 */
 const FORM_URL = 'https://forms.gle/wyWJ9KpaKx6HGXvP7';
+
+/* ✅ 你的影片連結 */
+const VIDEO_URL = 'https://youtu.be/pEm1sZS9g4g?si=6qftr0EIWiUyFIEa';
 
 const $ = (sel, root=document) => root.querySelector(sel);
 const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
@@ -485,6 +487,16 @@ function bindForm(){
   }
 }
 
+/* ✅ Video */
+function openVideo(){
+  window.open(VIDEO_URL, '_blank', 'noopener');
+}
+function bindVideo(){
+  const btn = $('#btnVideo');
+  if(!btn) return;
+  btn.addEventListener('click', openVideo);
+}
+
 /* ---------------- Utils ---------------- */
 function escapeHtml(str){
   return String(str)
@@ -526,6 +538,7 @@ function init(){
   bindTimer();
   bindChips();
   bindForm();
+  bindVideo();
 
   toast('已就緒：按一下就能開始。');
 }
